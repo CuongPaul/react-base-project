@@ -1,0 +1,24 @@
+.home-wrapper {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-size: contain;
+  background-image: url("../../../public/images/background.webp");
+
+  .home-wrapper__img {
+    animation: zoom-in-zoom-out 1s ease infinite;
+  }
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    scale: 100%;
+  }
+  50% {
+    scale: 120%;
+  }
+  100% {
+    scale: 100%;
+  }
+}

@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useReducer } from "react";
+import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import { ACCESS_TOKEN } from "./types";
+import { AppContext } from "./contexts";
+import { PrivateRoute } from "./components";
+import { Home, Signin, NotFound } from "./pages";
+import { AccountReducer, initialAccountState } from "./contexts/account";
+
+const App = () => {
+  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+
+  const [accountState, accountDispatch] = useReducer(
+    AccountReducer,
+    initialAccountState
   );
-}
+
+  return (
+    <AppContext.Provider value={{ accountState, accountDispatch }}>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
+          <Route
+            path="/signin"
+            element={accessToken ? <Navigate to="/home" /> : <Signin />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AppContext.Provider>
+  );
+};
 
 export default App;
