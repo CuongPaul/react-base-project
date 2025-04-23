@@ -22,7 +22,7 @@ const apiClient = async ({
   method = "GET",
   isShowError = true,
 }: RequestOptions) => {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const token = localStorage.getItem(ACCESS_TOKEN);
 
   const options: any = {
     method,
@@ -33,8 +33,7 @@ const apiClient = async ({
 
   if (body) options.data = body;
   if (query) options.params = query;
-  if (accessToken)
-    options.headers = { ...options.headers, Authorization: accessToken };
+  if (token) options.headers = { ...options.headers, Authorization: token };
 
   const res = await axios(options).catch((err) => {
     isShowError && toast.error(err.message);

@@ -1,3 +1,3 @@
-import getImageMeta from "./get-image-meta";
+import fakeApi from "./fake-api";
 
-export { getImageMeta };
+export { fakeApi };

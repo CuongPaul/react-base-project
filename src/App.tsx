@@ -8,7 +8,7 @@ import { Home, Signin, NotFound } from "./pages";
 import { AccountReducer, initialAccountState } from "./contexts/account";
 
 const App = () => {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const token = localStorage.getItem(ACCESS_TOKEN);
 
   const [accountState, accountDispatch] = useReducer(
     AccountReducer,
@@ -24,7 +24,7 @@ const App = () => {
           </Route>
           <Route
             path="/signin"
-            element={accessToken ? <Navigate to="/home" /> : <Signin />}
+            element={token ? <Navigate to="/home" /> : <Signin />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
