@@ -7,17 +7,17 @@
   background-image: url("../../../public/images/background.webp");
 
   .character {
+    height: var(--image-height);
     background-image: var(--image-url);
     width: calc(var(--image-width) / var(--number-of-frame));
   }
 
-  .single-character {
-    height: var(--image-height);
-    animation: SingleCharacter 2s steps(var(--number-of-frame)) infinite;
+  .animated {
+    animation: Animated var(--speed) steps(var(--number-of-frame)) infinite;
   }
 }
 
-@keyframes SingleCharacter {
+@keyframes Animated {
   from {
     background-position: 0 0;
   }
